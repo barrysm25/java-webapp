@@ -1,0 +1,409 @@
+7. Delete
+
+Delete a file or directory.
+
+
+Use the delete operation when you want to remove a file or directory from the repository.
+
+If you try to delete a file which has been modified in your working copy, your VCS might complain.
+
+Typically, the delete operation will immediately delete the working copy of the file, but the actual deletion of the file in the repository is simply added to the pending changeset.
+
+Recall that in the repository the file is not really deleted. When you commit a changeset containing a delete, you are simply creating a new version of the tree which does not contain the deleted file. The previous version of the tree is still in the repository, and that version still contains the file.
+
+8. Rename
+
+Rename a file or directory.
+
+
+Use the rename operation when you want to change the name of a file or directory. The operation is added to the pending changeset, but the item in the working copy typically gets renamed immediately.
+
+There is lot of variety in how version control tools support rename. Some of the earlier tools had no support for rename at all.
+
+Some tools (including Bazaar and Veracity) implement rename formally, requiring that they be notified explicitly when something is to be renamed. Such tools treat the name of a file or directory as simply one of its attributes, subject to change over time.
+
+Still other tools (including Git) implement rename informally, detecting renames by observing changes rather than by keeping track of the identity of a file. Rename detection usually works well in practice, but if a file has
+
+been both renamed and modified, there is a chance the VCS will do the wrong thing.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://www.ericsink.com/vcbe
+ 
+Version Control by Example — Centralized Version Control — Basics — 10
+
+
+9. Move
+
+Move a file or directory.
+
+
+Use the move operation when you want to move a file or directory from one place in the tree to another. The operation is added to the pending changeset, but the item in the working copy typically gets moved immedi-ately.
+
+Some tools treat rename and move as the same operation (in the Unix tradition of treating the file’s entire path as its name), while others keep them separate (by thinking of the file’s name and its containing directory as separate attributes).
+
+
+
+
+
+10. Status
+
+List the modifications that have been made to the working copy.
+
+
+As you make changes in your working copy, each change is added to the pending changeset. The status operation is used to see the pending change-set. Or to put it another way, status shows you what changes would be applied to the repository if you were to commit.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://www.ericsink.com/vcbe
+ 
+Version Control by Example — Centralized Version Control — Basics — 11
+
+
+11. Diff
+
+Show the details of the modifications that have been made to the working copy.
+
+
+Status provides a list of changes but no details about them. To see exactly what changes have been made to the files, you need to use the diff operation. Your VCS may implement diff in a number of different ways. For a com-mand-line application, it may simply print out a diff to the console. Or your VCS might launch a visual diff application.
+
+
+
+
+
+
+
+
+
+12. Revert
+
+Undo modifications that have been made to the working copy.
+
+
+Sometimes I make changes to my working copy that I simply don’t intend to keep. Perhaps I tried to fix a bug and discovered that my fix introduced five new bugs which are worse than the one I started with. Or perhaps I just changed my mind. In any case, a very nice feature of a working copy is the ability to revert the changes I have made.
+
+A complete revert of the working copy will throw away all your pending changes and return the working copy to the way it was just after you did the checkout.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://www.ericsink.com/vcbe
+ 
+Version Control by Example — Centralized Version Control — Basics — 12
+
+
+13. Log
+
+Show the history of changes to the repository.
+
+
+Your repository keeps track of every version that has ever existed. The log operation is the way to see those records. It displays each changeset along with additional data such as:
+
+•	Who made the change?
+
+•	When was the change made?
+
+•	What was the log message?
+
+Most version control tools present ways of slicing and dicing this informa-tion. For example, you can ask log to list all the changesets made by the user named Leonardo, or all the changesets made during April 2010.
+
+
+14. Tag
+
+Associate a meaningful name with a specific version in the repository.
+
+
+Version control tools provide a way to mark a specific instant in the history of the repository with a meaningful name.
+
+This is not altogether different from the descriptive and memorable names we use for variables and constants in our code. Which of the following two lines of code is easier to understand?
+
+if (-43 == e)
+
+if (ERR_FILE_NOT_FOUND == errorcode)
+
+Similarly, which of the following is the most intuitive?
+
+378
+
+eb1637d58b1bd8f253a2f3610e8e5a7050a434ec
+
+LAST_VERSION_BEFORE_COREY_FOULED_EVERYTHING_UP
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://www.ericsink.com/vcbe
+ 
+Version Control by Example — Centralized Version Control — Basics — 13
+
+
+15. Branch
+
+Create another line of development.
+
+
+The branch operation is what you use when you want your development process to fork off into two different directions. For example, when you release version 3.0, you might want to create a branch so that development of 4.0 features can be kept separate from 3.0.x bug-fixes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+16. Merge
+
+Apply changes from one branch to another.
+
+
+Typically when you have used branch to enable your development to diverge, you later want it to converge again, at least partially. For example, if you created a branch for 3.0.x bug-fixes, you probably want those bug-fixes to happen in the main line of development as well. Without the merge operation, you could still achieve this by manually doing the bug-fixes in both branches. Merge makes this operation simpler by automating things as much as possible.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://www.ericsink.com/vcbe
+ 
+Version Control by Example — Centralized Version Control — Basics — 14
+
+
+17. Resolve
+
+Handle conflicts resulting from a merge.
+
+
+In some cases, the merge operation requires human intervention. Merge automatically deals with everything that can be done safely. Everything else is considered a conflict. For example, what if the file foo.js was modified in one branch and deleted in the other? This kind of situation requires a person to make the decisions. The resolve operation is used to help the user figure things out and to inform the VCS how the conflict should be handled.
+
+
+
+
+
+
+
+
+18. Lock
+
+Prevent other people from modifying a file.
+
+
+The lock operation is used to get exclusive rights to modify a file. Not all version control tools include this feature. In some cases, it is provided but is intended to be rarely used. For any files that are in a format based on plain text (source code, XML, etc.), it is usually best to just let the VCS handle the concurrency issues. But for binary files which cannot be auto-matically merged, it can be handy to grab a lock on a file.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://www.ericsink.com/vcbe
+ 
